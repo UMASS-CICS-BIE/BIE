@@ -1,0 +1,17 @@
+TNear.h:667: Warning 362: operator= ignored
+TNear.h:681: Warning 362: operator= ignored
+TNear.h:3014: Warning 389: operator[] ignored (consider using %extend)
+TNear.h:6313: Warning 362: operator= ignored
+TNear.h:6314: Warning 362: operator= ignored
+TNear.h:6315: Warning 383: operator++ ignored
+TNear.h:6316: Warning 384: operator-- ignored
+TNear.h:6317: Warning 383: operator++ ignored
+TNear.h:6318: Warning 384: operator-- ignored
+TNear.h:6341: Warning 325: Nested class not currently supported (iterator ignored)
+TNear.h:6359: Warning 362: operator= ignored
+TNear.h:6360: Warning 362: operator= ignored
+TNear.h:6361: Warning 383: operator++ ignored
+TNear.h:6362: Warning 384: operator-- ignored
+TNear.h:6363: Warning 383: operator++ ignored
+TNear.h:6364: Warning 384: operator-- ignored
+TNear.h:6387: Warning 325: Nested class not currently supported (const_iterator ignored)

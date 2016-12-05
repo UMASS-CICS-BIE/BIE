@@ -1,0 +1,5 @@
+BinaryFilters.h:20: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+BinaryFilters.h:75: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+BinaryFilters.h:126: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+BinaryFilters.h:176: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+BinaryFilters.h:223: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.

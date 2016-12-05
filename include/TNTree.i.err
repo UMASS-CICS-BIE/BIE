@@ -1,0 +1,5 @@
+TNTree.h:64: Warning 325: Nested class not currently supported (listElem ignored)
+TNTree.h:101: Warning 362: operator= ignored
+TNTree.h:299: Warning 325: Nested class not currently supported (Node ignored)
+TNTree.h:343: Warning 325: Nested class not currently supported (Branch ignored)
+TNTree.h:377: Warning 325: Nested class not currently supported (Leaf ignored)

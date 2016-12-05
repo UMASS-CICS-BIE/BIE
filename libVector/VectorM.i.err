@@ -1,0 +1,49 @@
+VectorM.h:60: Warning 389: operator[] ignored (consider using %extend)
+VectorM.h:62: Warning 362: operator= ignored
+VectorM.h:133: Warning 314: 'print' is a python keyword, renaming to '_print'
+VectorM.h:178: Warning 362: operator= ignored
+VectorM.h:179: Warning 389: operator[] ignored (consider using %extend)
+VectorM.h:254: Warning 314: 'print' is a python keyword, renaming to '_print'
+VectorM.h:303: Warning 389: operator[] ignored (consider using %extend)
+VectorM.h:304: Warning 389: operator[] ignored (consider using %extend)
+VectorM.h:309: Warning 362: operator= ignored
+VectorM.h:374: Warning 314: 'print' is a python keyword, renaming to '_print'
+VectorM.h:55: Warning 503: Can't wrap 'operator Three_Vector' unless renamed to a valid identifier.
+VectorM.h:89: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+VectorM.h:90: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+VectorM.h:95: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:96: Warning 503: Can't wrap 'operator ^' unless renamed to a valid identifier.
+VectorM.h:100: Warning 503: Can't wrap 'operator &' unless renamed to a valid identifier.
+VectorM.h:108: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:109: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:110: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+VectorM.h:118: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:119: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:120: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+VectorM.h:121: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+VectorM.h:122: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:123: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:124: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+VectorM.h:125: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:126: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:127: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:128: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:217: Warning 503: Can't wrap 'operator ^' unless renamed to a valid identifier.
+VectorM.h:242: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+VectorM.h:243: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+VectorM.h:244: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+VectorM.h:245: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+VectorM.h:300: Warning 503: Can't wrap 'operator VectorM' unless renamed to a valid identifier.
+VectorM.h:337: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+VectorM.h:338: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+VectorM.h:339: Warning 503: Can't wrap 'operator ^' unless renamed to a valid identifier.
+VectorM.h:345: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:346: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+VectorM.h:347: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+VectorM.h:352: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+VectorM.h:353: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+VectorM.h:354: Warning 503: Can't wrap 'operator ^' unless renamed to a valid identifier.
+VectorM.h:355: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+VectorM.h:356: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+VectorM.h:357: Warning 503: Can't wrap 'operator ^' unless renamed to a valid identifier.
+VectorM.h:364: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.

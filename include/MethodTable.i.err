@@ -1,0 +1,6 @@
+MethodTable.h:188: Warning 325: Nested class not currently supported (NoSuchClassException ignored)
+MethodTable.h:196: Warning 325: Nested class not currently supported (NoConstructorException ignored)
+MethodTable.h:202: Warning 325: Nested class not currently supported (NoSuchMethodException ignored)
+MethodTable.h:210: Warning 325: Nested class not currently supported (ReturnTypeException ignored)
+MethodTable.h:218: Warning 325: Nested class not currently supported (ArgumentMismatchException ignored)
+MethodTable.h:226: Warning 325: Nested class not currently supported (AmbiguousCallException ignored)

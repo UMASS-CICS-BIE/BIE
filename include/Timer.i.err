@@ -1,0 +1,2 @@
+Timer.h:81: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+Timer.h:91: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.

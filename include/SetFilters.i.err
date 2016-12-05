@@ -1,0 +1,7 @@
+SetFilters.h:19: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+SetFilters.h:64: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+SetFilters.h:109: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+SetFilters.h:165: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+SetFilters.h:216: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+SetFilters.h:261: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+SetFilters.h:311: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.

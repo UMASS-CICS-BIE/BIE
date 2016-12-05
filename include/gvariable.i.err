@@ -1,0 +1,13 @@
+gvariable.h:43: Warning 462: Unable to set variable of type char []
+gvariable.h:101: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:104: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:107: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:131: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:134: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:137: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:140: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:143: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:146: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:156: Warning 462: Unable to set variable of type char []
+gvariable.h:232: Warning 454: Setting a pointer/reference variable may leak memory.
+gvariable.h:235: Warning 454: Setting a pointer/reference variable may leak memory.

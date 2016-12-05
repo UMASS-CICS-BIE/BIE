@@ -1,0 +1,3 @@
+BIEMutex.h:6: Error: Nothing known about namespace 'ost'
+BIEMutex.h:27: Warning 503: Can't wrap 'operator ++' unless renamed to a valid identifier.
+BIEMutex.h:35: Warning 503: Can't wrap 'operator --' unless renamed to a valid identifier.

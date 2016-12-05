@@ -1,0 +1,6 @@
+MetricTree.h:40: Warning 401: Nothing known about base class 'Serializable'. Ignored.
+MetricTree.h:260: Warning 401: Nothing known about base class 'Serializable'. Ignored.
+MetricTree.h:346: Warning 401: Nothing known about base class 'Serializable'. Ignored.
+MetricTree.h:392: Warning 401: Nothing known about base class 'Serializable'. Ignored.
+MetricTree.h:90: Warning 509: Overloaded method Ball::Ball(Ball const *) effectively ignored,
+MetricTree.h:77: Warning 509: as it is shadowed by Ball::Ball(Ball const &).

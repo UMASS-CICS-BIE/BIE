@@ -1,0 +1,2 @@
+VWLikelihoodFunction.h:20: Warning 401: Nothing known about base class 'LikelihoodFunction'. Ignored.
+VWLikelihoodFunction.h:20: Warning 401: Nothing known about base class 'Funct1d'. Ignored.

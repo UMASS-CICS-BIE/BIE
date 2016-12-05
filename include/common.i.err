@@ -1,0 +1,2 @@
+common.h:5: Warning 454: Setting a pointer/reference variable may leak memory.
+common.h:6: Warning 454: Setting a pointer/reference variable may leak memory.

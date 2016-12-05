@@ -1,0 +1,2 @@
+TileMasterWorkerThread.h:7: Error: Nothing known about namespace 'ost'
+TileMasterWorkerThread.h:26: Warning 401: Nothing known about base class 'Thread'. Ignored.

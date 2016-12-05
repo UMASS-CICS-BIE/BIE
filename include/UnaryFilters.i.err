@@ -1,0 +1,8 @@
+UnaryFilters.h:18: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+UnaryFilters.h:59: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+UnaryFilters.h:101: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+UnaryFilters.h:147: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+UnaryFilters.h:185: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+UnaryFilters.h:226: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+UnaryFilters.h:267: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.
+UnaryFilters.h:314: Warning 401: Nothing known about base class 'RecordStreamFilter'. Ignored.

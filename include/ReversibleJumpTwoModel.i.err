@@ -1,0 +1,2 @@
+ReversibleJumpTwoModel.h:48: Warning 401: Nothing known about base class 'Serializable'. Ignored.
+ReversibleJumpTwoModel.h:456: Warning 401: Nothing known about base class 'MCAlgorithm'. Ignored.

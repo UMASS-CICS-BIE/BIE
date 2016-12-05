@@ -1,0 +1,5 @@
+BasicType.h:21: Warning 401: Nothing known about base class 'Serializable'. Ignored.
+BasicType.h:47: Warning 454: Setting a pointer/reference variable may leak memory.
+BasicType.h:50: Warning 454: Setting a pointer/reference variable may leak memory.
+BasicType.h:53: Warning 454: Setting a pointer/reference variable may leak memory.
+BasicType.h:56: Warning 454: Setting a pointer/reference variable may leak memory.

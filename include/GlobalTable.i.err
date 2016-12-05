@@ -1,0 +1,3 @@
+GlobalTable.h:22: Warning 451: Setting a const char * variable may leak memory.
+GlobalTable.h:26: Warning 451: Setting a const char * variable may leak memory.
+GlobalTable.h:34: Warning 462: Unable to set dimensionless array variable

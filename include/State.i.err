@@ -1,0 +1,5 @@
+State.h:39: Warning 314: 'None' is a python keyword, renaming to '_None'
+State.h:320: Warning 362: operator= ignored
+State.h:325: Warning 362: operator= ignored
+State.h:342: Warning 389: operator[] ignored (consider using %extend)
+State.h:547: Error: Syntax error in input(1).
