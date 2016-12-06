@@ -1,0 +1,81 @@
+// This is really -*- C++ -*-
+
+#ifndef InitialMixturePriorPoisson_h
+#define InitialMixturePriorPoisson_h
+
+#include <ACG.h>
+#include <Uniform.h>
+#include <Normal.h>
+
+#include <InitialMixturePrior.h>
+
+@include_persistence
+
+namespace BIE {
+  
+  //+ CLICLASS InitialMixturePriorPoisson SUPER InitialMixturePrior
+  /**
+     Prior for mixture model
+  */
+  class @persistent(InitialMixturePriorPoisson) : public @super(InitialMixturePrior)
+  {
+
+  protected:
+
+    //! The Poisson frequency
+    double @ap(Lambda);
+
+    //! Vector containing the prefactors for each value of \f$k\in[0, nmix]\f$
+    vector<double> @ap(Poisson);
+
+    //! Uniform random variates
+    Uniform * @ap(unit);
+
+    //! Generate a variate by table look up
+    int GenPoisson();
+
+  public:
+    
+    /**@name Constructors */
+    //@{
+
+    //+ CLICONSTR
+    //! For cloning only: makes an uninitialized prior
+    InitialMixturePriorPoisson();
+
+    //+ CLICONSTR StateInfo* double double clivectordist*
+    /** The useful constructor
+	@param si    is the StateInfo definition
+	@param lambda is the Poisson mean
+	@param alpha is the Dirichlet parameter
+	@param vdist is the vector of distributions, one for each each dimension of the parameter vector
+    */
+    InitialMixturePriorPoisson(StateInfo *si, double lambda, 
+			       double alpha, clivectordist *vdist);
+
+    //! Destructor
+    ~InitialMixturePriorPoisson();
+
+
+    /**@name Distribution members
+       The packing order in vectors is:
+       Nmix weights, followed by Nmix vectors of Ndim elements
+     */
+    //@{
+    //! Object factor (clone)
+    InitialMixturePriorPoisson* New();
+    //@}
+    
+    //! Sample: return weights and components separately
+    void SamplePrior(unsigned& M, vector<double>& wght, 
+		     vector< vector<double> >& phi);
+
+    //! Sample: return a single parameter vector for subspace M
+    void SamplePrior(unsigned M, vector<double>& V);
+
+    @persistent_end
+  };
+
+}
+
+#endif

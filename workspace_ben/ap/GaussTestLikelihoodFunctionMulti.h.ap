@@ -1,0 +1,148 @@
+// This is -*- C++ -*-
+
+#ifndef GaussTestLikelihoodFunctionMulti_h
+#define GaussTestLikelihoodFunctionMulti_h
+
+@include_persistence
+
+#include <LikelihoodFunction.h>
+
+namespace BIE {
+
+  //+ CLICLASS GaussTestLikelihoodFunctionMulti SUPER LikelihoodFunction
+  //! A "user-defined" likelihood function for testing
+  //! 
+  //! By default, the "data" is the combination of two one-dimensional
+  //! Gaussians, one at 0.2 with variance of 0.03 and one at 0.9 with
+  //! variance of 0.03 with 50% weights each.
+  //! 
+  //! The default model, including the number of components in the
+  //! mixture, may be changed at construction.
+  //! 
+  //! The variance may be modeled or fixed (using the SetDim member).
+  //! 
+  //! This model is similar to GaussTestLikelihoodFunction but this
+  //! version of the model allows data aggregation by powers of two and
+  //! multiple level resolution.  The global variable current_level sets
+  //! the number of bins in LikeProb.
+  //! @ingroup likefunc
+  class @persistent(GaussTestLikelihoodFunctionMulti) : public @super(LikelihoodFunction) 
+  {
+
+  private:
+
+    deque < vector<double> > @ap(fdata);
+    deque <int> @ap(nbins);
+    deque <double> @ap(dx);
+    vector <double> @ap(pdata);
+    vector <int>    @ap(cdata);
+
+    double @ap(xmin), @ap(xmax);
+    unsigned @ap(nmix);
+    int @ap(dim);
+    int @ap(ptwo);
+    int @ap(N);
+    int @ap(levels);
+    bool @ap(point);
+
+    vector <double> @ap(centers), @ap(variance), @ap(weights);
+
+ public:
+
+    //+ CLICONSTR
+    //! Null constructor
+    GaussTestLikelihoodFunctionMulti();
+
+    //+ CLICONSTR int int int
+    /** Constructor where
+	@param Ptwo is the power of two exponent for the number of bins
+	@param N0 is the sample size points
+	@param Levels is the number of partitions
+     */
+    GaussTestLikelihoodFunctionMulti(int Ptwo, int N0, int Levels);
+
+    //+ CLICONSTR int int int clivectord* clivectord* clivectord*
+    /** Constructor where
+	@param Ptwo is the power of two exponent for the number of bins
+	@param N0 is the sample size points
+	@param Levels is the number of partitions
+	The input vectors 
+	@param cen0 are the component centers
+	@param var0 are the component variances
+	@param wgt0 are the weight values for the sampled model.
+
+	The number of components is determined
+	from the rank of the input vectors (which must agree!)
+     */
+    GaussTestLikelihoodFunctionMulti(int Ptwo, int N0, int Levels,
+				     clivectord* cen0,
+				     clivectord* var0,
+				     clivectord* wgt0);
+
+    //+ CLICONSTR int int
+    /** Constructor where
+	@param N0 is the sample size points
+	@param Levels is the number of partitions
+     */
+    GaussTestLikelihoodFunctionMulti(int N0, int Levels);
+
+    //+ CLICONSTR int int clivectord* clivectord* clivectord*
+    /** Constructor for a point likelihood function with a sample size
+	where
+	@param N0 is the sample size
+	@param Levels is the number of partitions
+	The input vectors 
+	@param cen0 are the component centers
+	@param var0 are the component variances
+	@param wgt0 are the weight values for the sampled model.
+
+	The number of components is determined
+	from the rank of the input vectors (which must agree!)
+
+     */
+    GaussTestLikelihoodFunctionMulti(int N0, int Levels,
+				     clivectord* cen0,
+				     clivectord* var0,
+				     clivectord* wgt0);
+
+
+    //+ CLIMETHOD void SetLevels int
+    //! Set number levels
+    void SetLevels(int n);
+
+    //+ CLIMETHOD void SetDim int
+    //! Set data dimension (currently 1 or 2)
+    void SetDim(int n);
+
+    //+ CLIMETHOD void PrintData
+    //! Print data to a file for the current level
+    void PrintData();
+
+    //! This is likelihood function
+    double LikeProb(std::vector<double> &z, SampleDistribution* sd, 
+		    double norm, Tile *t, State *s, int indx);
+
+    //! This is joint cumulative probability function
+    double CumuProb(std::vector<double> &z, SampleDistribution* sd, 
+		    double norm, Tile *t, State *s, int indx, Fct1dPtr f);
+
+    //! Label parameters.  Scheduled for removal.
+    const std::string ParameterDescription(int i);
+
+ protected:
+
+    //! Make the synthetic binned data
+    void makeSyntheticData();
+
+    //! Make the synthetic point data
+    void makeSyntheticPointData();
+
+    //! Make data arrays
+    void makeArrays();
+
+    @persistent_end
+  };
+
+} // namespace BIE
+
+#endif

@@ -1,0 +1,226 @@
+// This is really -*- C++ -*-
+
+
+
+#ifndef GalaxyModelTwoD_h
+#define GalaxyModelTwoD_h
+
+#include <gaussQ.h>
+#include <Model.h>
+#include <Histogram1D.h>
+#include <CacheGalaxyModel.h>
+
+@include_persistence
+
+namespace BIE {
+
+  //+ CLICLASS GalaxyModelTwoD SUPER Model
+  //! Simple test galaxy model with one flux, one color and no caching
+  class @persistent(GalaxyModelTwoD) : public @super(Model)
+  {
+  public:
+
+    //+ CLICONSTR int int SampleDistribution*
+    //! Constructor 
+    GalaxyModelTwoD(int ndim, int mdim, SampleDistribution *_dist);
+
+    //! Destructor 
+    ~GalaxyModelTwoD();
+
+    //+ CLIMETHOD void SetKnots int
+    //! Reset number of integration points
+    void SetKnots(int num) 
+    { 
+      NUM = num;
+      delete intgr;
+      intgr = new JacoQuad(NUM, ALPHA, BETA);
+    }
+
+    //+ CLIMETHOD void SetExtinction double double
+    //! Radial and Vertical size if extinction slab
+    void SetExtinction(double A, double Z) {A1 = A; Z1 = Z;}
+
+    //! Initialize state dependent part of calculation
+    //@{
+    //! From State vector
+    void Initialize(State&);
+    //! From component weights and component parameter vectors
+    void Initialize(vector<double>& w, vector< vector<double> >& p);
+    //@}
+
+    //! Reset model cache
+    void ResetCache() {}
+
+    //! Compute normalization for point likelihood
+    virtual double NormEval(double x, double y);
+
+    //! Compute normalization of tiles
+    virtual double NormEval(double x, double y, SampleDistribution *d);
+
+    //! Integration measure
+    virtual double NormEvalMeasure(double x, double y) { return cos(y); }
+
+    //! Main method returning source density
+    vector<double> Evaluate(double x, double y, SampleDistribution *d);
+
+    /// Identify labels for StateInfo
+    vector<string> ParameterLabels();
+
+    /** @name Global parameters */
+    //@{
+
+    //! Minimum apparent magnitude (default 6)
+    static double @ap(LMAG);
+
+    //! Minimum apparent magnitude (default 16)
+    static double @ap(HMAG);
+
+    //! Extinction scale length (default 20 [kpc])
+    static double @ap(A1);
+
+    //! Extinction scale height (default 100 [pc])
+    static double @ap(Z1);
+
+    //! Standard candle magnitude (default -4.0)
+    static double @ap(K0);
+
+    //! Number of integration knots for Jacobi quadrature (default 200)
+    static int @ap(NUM);
+
+    /** Jacobi quadrature parameters (default: 0, 0)
+	@see GalaxyModelND for more details
+    */
+    //@{
+    //! Alpha exponent value
+    static double @ap(ALPHA);
+    //! Beta exponent value
+    static double @ap(BETA);
+    //@}
+
+    //! Observers position (kpc) (default 8.0)
+    static double @ap(R0);
+
+    //! Maximum radius (kpc) (default 20.0)
+    static double @ap(RMAX);
+
+    //! Extinction (mags) (default 0.1)
+    static double @ap(AK);
+
+    //! Limits for model parameters
+    //@{
+    //! Minimum scale length
+    static double @ap(AMIN);		// Defaults: 0.2
+    //! Maximum scale length
+    static double @ap(AMAX);		//           8.0
+    //! Minimum scale height
+    static double @ap(HMIN);		//          50.0
+    //! Maxiimum scale height
+    static double @ap(HMAX);		//        1200.0
+    //@}
+
+    //! File defining stellar classes
+    static string @ap(BASISDATA);	// Defaults: "basisdata.2d"
+
+    //@}
+
+  protected:
+
+    //! Constants
+    //@{
+    //! \f$\ln(10)\f$
+    static double @ap(Log10);
+    //! Radians per degree
+    static double @ap(onedeg);
+    //@}
+    
+    //! Total number of components in mixture
+    int @ap(M);
+
+    //! Current number of components in mixture
+    int @ap(Mcur);
+
+    //! Number of model dimensions
+    int @ap(Ndim);
+     
+    //! Constants related to record type.
+    //@{
+    //! String descriptor for scale length
+    static const char* LENGTH_FIELDNAME;
+    //! String descriptor for scale height
+    static const char* HEIGHT_FIELDNAME;
+    //! String descriptors for remaining parameters
+    static const char* PARAM_NAMES[];
+    //@}
+
+    //! Histogram components
+    //@{
+    //! Number of bins
+    int @ap(nbins);
+    //! Low values for first flux dimension
+    vector<double> @ap(lowb1);
+    //! High values for first flux dimension
+    vector<double> @ap(highb1);
+    //! Low values for second flux dimension
+    vector<double> @ap(lowb2);
+    //! High values for second flux dimension
+    vector<double> @ap(highb2);
+    //@}
+
+    //! Point components
+    vector<double> @ap(flux);
+
+    //! Stellar components
+    //@{
+    //! Number of parameters for the model
+    int nparam;
+    //! Centers for first dimension
+    vector<double> @ap(x);
+    //! Centers for second dimension
+    vector<double> @ap(y);
+    //! Widths for first dimension
+    vector<double> @ap(sx);
+    //! Widths for second dimension
+    vector<double> @ap(sy);
+    //! Weights for each component
+    vector<double> @ap(w);
+    //@}
+
+    //! Integrator
+    JacoQuad *@ap(intgr);
+
+    //! Weights for each component in the mixture
+    vector<double> @ap(wt);
+
+    //! Parameter vector for each component in the mixture
+    vector< vector<double> >@ap(pt);
+
+    //! Compute line-of-sight quantities for these coordinates
+    virtual void generate(double L, double B, SampleDistribution *d);
+
+    //! Compute predicted bin values for current parameter vector
+    virtual void compute_bins();
+
+    //! Flag is true if parameter values are in bounds
+    bool @ap(good_bounds);
+
+    //! Check parameter bounds and set flag
+    void check_bounds();
+
+    //! Line-of-sight element cache
+    mmapGalCM @ap(cache);
+
+    //! Cache iterator
+    mmapGalCM::iterator mit;
+
+    //! Current cache element
+    CacheGalaxyModel *@ap(current);
+
+    //! Type of evaluation (e.g. point or binned)
+    EvalType @ap(type);
+
+    @persistent_end
+  };
+
+}
+
+#endif

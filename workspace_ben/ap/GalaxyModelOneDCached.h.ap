@@ -1,0 +1,70 @@
+// This is really -*- C++ -*-
+
+#ifndef GalaxyModelOneDCached_h
+#define GalaxyModelOneDCached_h
+
+#include <gaussQ.h>
+#include <Model.h>
+#include <Histogram1D.h>
+
+#include <GalaxyModelOneD.h>
+
+@include_persistence
+
+namespace BIE {
+  
+  //+ CLICLASS GalaxyModelOneDCached SUPER GalaxyModelOneD
+  //! Simple test galaxy model with one flux and caching.
+  //! 
+  //! This is model differs from GalaxyModelOneD by precomputing
+  //! the line-of-sight quanties over a grid of parameter space
+  //! a priori.  This may use too much memory to be practical, so
+  //! be careful.
+  class @persistent(GalaxyModelOneDCached) : public @super(GalaxyModelOneD)
+  {
+  public:
+
+    //+ CLICONSTR int int SampleDistribution*
+    //! Constructor 
+    GalaxyModelOneDCached(int ndim, int mdim, SampleDistribution *_dist)
+      : GalaxyModelOneD(ndim, mdim, _dist), current2(0) { }
+      
+
+    //! Destructor 
+    ~GalaxyModelOneDCached();
+
+    //! Compute normalization of tiles
+    double NormEval(double x, double y, SampleDistribution *d);
+
+    //! Main method returning source density
+    vector<double> Evaluate(double x, double y, SampleDistribution *d);
+
+    /** @name Global parameters */
+    //@{
+
+    //! Size of A grid
+    static int @ap(numA);
+    
+    //! Size of H grid
+    static int @ap(numH);
+    
+    //@}
+
+  private:
+    double @ap(dA), @ap(dH);
+
+    mmapGalCMG @ap(cache2);
+    mmapGalCMG::iterator mit2;
+    CacheGalaxyModelGrid *@ap(current2);
+
+    void generate(double L, double B, SampleDistribution *sd=NULL);
+    void compute_bins();
+    void manageCache(coordPair&);
+
+    @persistent_end
+
+  };
+
+}
+
+#endif

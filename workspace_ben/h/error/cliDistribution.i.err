@@ -1,0 +1,2 @@
+cliDistribution.h:16: Warning 401: Nothing known about base class 'vector< BinnedDistribution * >'. Ignored.
+cliDistribution.h:16: Warning 401: Maybe you forgot to instantiate 'vector< BinnedDistribution * >' using %template.
