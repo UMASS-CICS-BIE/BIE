@@ -1,0 +1,187 @@
+// This is really -*- C++ -*-
+
+
+#ifndef Histogram1D_h
+#define Histogram1D_h
+
+#include <SmplHist.h>
+#include <Distribution.h>
+
+@include_persistence
+
+namespace BIE {
+
+//! Instances of BIE::Bin define histogram bins.
+class @persistent_root(Bin) {
+
+public:
+  //! Null constructor
+  Bin() {};
+  
+  //! Define bin values
+  //@{
+  //! bottom edge
+  double @autopersist(bot);
+  //! bin center
+  double @autopersist(center);
+  //! top edge
+  double @autopersist(top);
+  //! container value
+  double @autopersist(val);
+  //@}
+  
+  /** Less than operator used by the STL algorithm lower_bound to find
+      the value
+  */
+  bool operator<(const double& x) const {
+    return(x<top && x>bot);
+  }
+
+  @persistent_end
+};
+  
+/**
+  Implements a histogram that supports access as a cumulative
+ histogram.  This uses a class in the libsrnd library to implement the
+ histogram and compute its statistics.
+*/
+class @persistent(CumSampleHistogram) : public @super(SampleHistogram) 
+{
+
+private:
+  bool @autopersist(accum);
+
+  void compute_accum(void);
+  
+  int @autopersist(n);
+  vector<Bin> @autopersist(cum);
+  vector<double> @autopersist(bin);
+  
+public:
+  //! The constructor
+  CumSampleHistogram(double low, double hi, double bucketWidth = -1.0) :
+    SampleHistogram(low, hi, bucketWidth) { accum = false; }
+  
+  //! Get the value below fraction @param s
+  double quartile(double s);
+
+  //! Get the fraction below value @param s
+  double fraction(double s);
+
+  @persistent_end
+};
+
+//+ CLICLASS Histogram1D SUPER BinnedDistribution
+//! This class is used to create one dimensional histograms.
+class @persistent(Histogram1D) : public @super(BinnedDistribution) 
+{
+
+private:
+  
+  CumSampleHistogram * @autopersist(ch);
+  double @autopersist(low), @autopersist(high), @autopersist(width), @autopersist(toplimit);
+  double @autopersist(val);
+
+  bool AccumulateData(double v, vector<double> & x);
+  bool AccumulateData(double v, RecordBuffer * datapoint);
+  
+  //! Common initialization for constructors.
+  void initialize(double low, double high, double width);
+  
+public:
+  //+ CLICONSTR double double double RecordType*
+  /** The arguments specify the low bound of the histogram, the high bound
+      of the histogram, the width of each bin, and the type of the 
+      single attribute respectively.
+  */
+  Histogram1D(double low, double hi, double w, RecordType * type);
+
+  //+ CLICONSTR double double double string
+  /** The arguments specify the low bound of the histogram, the high
+      bound of the histogram, the width of each bin, and the name of
+      the single attribute respectively.
+  */
+  Histogram1D(double low, double hi, double w, string dataname);
+
+  //! Destructor: cleans up the allocations.
+  ~Histogram1D();
+
+  //! Cloning/Instance factory method.
+  Histogram1D* New();
+
+  //! Return the value of the partial distribution function at @param x
+  double PDF(vector<double>& x) 
+    {return ch->similarSamples(x[0])/width;}
+
+  //! Return log value of the partial distribution function at @param x
+  double logPDF(vector<double>& x) 
+    {return log(ch->similarSamples(x[0])/width);}
+
+  //! Return cumulative distribution function at @param x
+  double CDF(vector<double>& x) {return ch->fraction(x[0]);}
+
+  //! Return the low bin values
+  vector<double> lower(void) {return vector<double>(1, ch->min());}
+
+  //! Return the high bin values
+  vector<double> upper(void) {return vector<double>(1, ch->max());}
+
+  //! Return the mean bin value
+  vector<double> Mean(void) {return vector<double>(1, ch->mean());}
+
+  //! Return the standard deviaton about the mean  bin value
+  vector<double> StdDev(void) {return vector<double>(1, ch->stdDev());}
+
+  //! Return ith moment of bin values
+  vector<double> Moments(unsigned i) {
+    if (i==0) return vector<double>(1, 1.0);
+    if (i==2) return vector<double>(1, ch->stdDev()*ch->stdDev() + ch->mean()*ch->mean());
+    return vector<double>(1, ch->mean());
+  }
+  
+  //! Sample the histogram
+  State Sample(void) { 
+    cerr << "Histogram1D::Sample: Not implemented\n";
+    return vector<double>(1, 0.0);
+  }
+  
+  //! Compute the statistical summary
+  void ComputeDistribution();
+
+  //! Returns the number of in-bounds bins
+  int numberData() {
+    return ch->buckets()-2;
+  }
+    
+  //! Returns the value of a particular bin.
+  double getValue(unsigned i) {
+    if (i<0) i=0;
+    if (i>=static_cast<unsigned>(ch->buckets())-2) 
+      i=static_cast<unsigned>(ch->buckets())-3;
+    return (double)ch->inBucket(i+1);
+  }
+
+  //! Returns the lower boundary of a bin.
+  vector<double> getLow(unsigned i) {
+    if (i<0) i=0;
+    if (i>=static_cast<unsigned>(ch->buckets())-2) 
+      i=static_cast<unsigned>(ch->buckets())-3;
+    return vector<double>(1, ch->bucketThreshold(i));
+  }
+
+  //! Returns the upper boundary of a bin.
+  vector<double> getHigh(unsigned i) {
+    if (i<0) i=0;
+    if (i>=static_cast<unsigned>(ch->buckets())-2) 
+      i=static_cast<unsigned>(ch->buckets())-3;
+    return vector<double>(1, ch->bucketThreshold(i+1));
+  }
+  
+  //! Returns the dimensionality of the histogram - always 1.
+  int getdim(unsigned i) {return 1;}
+
+  @persistent_end
+};
+
+} // namespace BIE
+#endif

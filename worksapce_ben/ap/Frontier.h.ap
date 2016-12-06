@@ -1,0 +1,113 @@
+// This is reall -*- C++ -*-
+
+#ifndef FrontierExpansionHeuristic_h
+#define FrontierExpansionHeuristic_h
+
+@include_persistence
+
+#include <BaseDataTree.h>
+
+namespace BIE {
+  class BaseDataTree;
+
+  //+ CLICLASS FrontierExpansionHeuristic
+  /** When presented with the possible expansion (increase of
+      resolution) of a node in the tessellation tree, tree expansion
+      heuristics decide whether the expansion is worthwhile.
+  */
+  class @persistent_root(FrontierExpansionHeuristic)
+  {
+  public:
+    //! Destructor
+    virtual ~FrontierExpansionHeuristic() {}
+
+    /** Expand the frontier by moving it from the current tile to its
+	children
+    */
+    virtual bool expandTile(vector<int> children, int parenttile) = 0;
+
+    @persistent_end
+  };
+
+  //+ CLICLASS AlwaysIncreaseResolution SUPER FrontierExpansionHeuristic
+  //! A frontier mutator
+  //! 
+  //! Expand the frontier by moving it from the current tile to its
+  //! children
+  class  @persistent(AlwaysIncreaseResolution) : public @super(FrontierExpansionHeuristic) 
+  {
+  public:
+    //+ CLICONSTR
+    AlwaysIncreaseResolution() {}
+    
+    virtual bool expandTile(vector<int> children, int parent);
+
+    @persistent_end
+  }; 
+
+  //+ CLICLASS KSDistanceHeuristic SUPER FrontierExpansionHeuristic
+  //! KS Distance based heuristic.
+  //! 
+  //! This heuristic computes the KS statistic between each pair of child 
+  //! distributions proposed for expansion.  The KS statistic gives the 
+  //! probability that two distributions come from the same underlying distribution
+  //! If the KS statistic for any pair of child distributions is lower than the 
+  //! threshold, then the method recommends increasing the resolution of the tile,
+  //! because their is sufficient evidence supporting the hypothesis that the
+  //! distributions are different (and if they are different we want to look more
+  //! closely).
+  //! Setting a threshold at the 1% level would probably be pessimistic, since 
+  //! in this case expansion would not be recommended unless there was very good
+  //! statistical evidence suggesting the distributions are different (from
+  //! the rejection of the null hypothesis).  The question of what a good 
+  //! value would be is still open.
+  class  @persistent(KSDistanceHeuristic) : public @super(FrontierExpansionHeuristic) 
+  {
+  public:
+    //+ CLICONSTR BaseDataTree* double
+    //! Constructor
+    KSDistanceHeuristic(BaseDataTree * fulldist, double threshold) 
+    { this->fulldist = fulldist; this->threshold = threshold;}
+    
+    /** Expand the frontier by moving it from the current tile to its
+	children
+    */
+    virtual bool expandTile(vector<int> children, int parent);
+
+  private:
+    double @ap(threshold);
+    BaseDataTree * @ap(fulldist);
+
+    @persistent_end
+  };
+
+  //+ CLICLASS DataPointCountHeuristic SUPER FrontierExpansionHeuristic
+  //! This heuristic is based on the number of points contained in each tile.
+  //! Expansion is recommended until the number of points in a tile drops 
+  //! below a threshold.  This heuristic will therefore be useful where
+  //! there is empty space in the area being studied since the frontier
+  //! will only descend to a high resolution in the densely populated parts.
+  class  @persistent(DataPointCountHeuristic) : public @super(FrontierExpansionHeuristic) 
+  {
+  public:
+    //+ CLICONSTR BaseDataTree* int
+    //! Constructor
+    DataPointCountHeuristic(BaseDataTree * fulldist, int threshold) 
+    { this->fulldist = fulldist; this->threshold = threshold;}
+    
+    /** Expand the frontier by moving it from the current tile to its
+	children
+    */
+    virtual bool expandTile(vector<int> children, int parent);
+
+  private:
+    int @ap(threshold);
+    BaseDataTree * @ap(fulldist);
+
+    @persistent_end
+  };  
+}
+
+BIE_CLASS_ABSTRACT(BIE::FrontierExpansionHeuristic)
+
+#endif

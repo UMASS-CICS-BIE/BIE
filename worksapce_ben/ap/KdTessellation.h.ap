@@ -1,0 +1,74 @@
+// This is really -*- C++ -*-
+
+#ifndef KdTessellation_h
+#define KdTessellation_h
+
+#include <string>
+#include <algorithm>
+
+@include_persistence
+
+#include <Tessellation.h>
+#include <RecordInputStream.h>
+
+namespace BIE {
+
+//+ CLICLASS KdTessellation SUPER Tessellation
+/**
+   Rectangular tessellation using a kd-tree.  The tessellation space is
+   partioned so that each bin contains approximately the same number of 
+   points.  
+
+   @addtogroup tess Tessellation types 
+*/
+class @persistent(KdTessellation) : public @super(Tessellation) 
+{
+
+public:
+  //+ CLICONSTR Tile* RecordInputStream* int double
+  //! Constructor
+  KdTessellation(Tile *t,RecordInputStream* ris,int pointsperbin,double samplingpct);
+
+  //+ CLICONSTR Tile* RecordInputStream* int double double double double double
+  //! Constructor with domain limits
+  KdTessellation(Tile *t, RecordInputStream * ris, int pointsperbin, double samplingpct,
+                 double minx, double miny, double maxx, double maxy);
+
+  //! Destructor
+  ~KdTessellation() {};
+  
+  //! Returns the tile id of the tree root.
+  vector<int> GetRootTiles();
+
+  //! Returns the root node.
+  vector<Node*> GetRootNodes();
+  
+private:
+  //! Percent of dataset to sample to build the tessellation
+  double @autopersist(pcttosample);
+
+  //! Maximum number of points per tile
+  int @autopersist(maxptspertile);
+
+  //! The tessellation tree
+  Node* @autopersist(treeroot);
+
+  //! Tile factory
+  Tile* @autopersist(tilefactory);
+
+  //! The sampled data points used in the creation of the tree.
+  vector<twodcoords> sampledata;
+  
+  //! Perform tessellation of the space
+  void tessellate(Node**, int, int, int, int, int, 
+                  double, double, double, double);
+
+  //! Common initialization routine used by both constructors.
+  void initialize(Tile *t, RecordInputStream * ris, int pointsperbin, 
+       double samplingpct,double minx, double miny, double maxx, double maxy);  
+
+  @persistent_end
+};
+
+} // namespace BIE
+#endif

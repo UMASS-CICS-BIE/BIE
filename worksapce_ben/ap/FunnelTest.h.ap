@@ -1,0 +1,84 @@
+// -*- C++ -*-
+
+#ifndef FunnelTest_h
+#define FunnelTest_h
+
+#include <LikelihoodFunction.h>
+#include <gaussQ.h>
+
+@include_persistence
+
+namespace BIE {
+  
+  //+ CLICLASS FunnelTest SUPER LikelihoodFunction
+  //! A "user-defined" likelihood function for testing
+  //!
+  //! Each parameter is normally distributed with a mean of zero and
+  //! variance of \f$e^v\f$, following the example given by Radford Neal
+  //! (2003).  The first parameter of the vector is the value \f$v\f$.
+  //!
+  //! @ingroup likefunc
+  class @persistent(FunnelTest) : public @super(LikelihoodFunction) 
+  {
+    
+  private:
+    
+    //! Number of dimensions
+    int            @autopersist(dim);
+
+    //! Minimum value of "v"
+    double         @autopersist(vmin);
+
+    //! Maximum value of "v"
+    double         @autopersist(vmax);
+
+    //! Normalization value for "v"
+    double         @autopersist(vnorm);
+
+    //! Log normalization value for "v"
+    double         @autopersist(lvnorm);
+
+    //! Normalization for the "v" variable
+    void normalize()
+    { 
+      lvnorm = -vmax - log(1.0 - exp(vmin-vmax)); 
+      vnorm  = exp(lvnorm);
+    }
+
+  public:
+
+    //+ CLICONSTR
+    //! Null constructor
+    FunnelTest() : dim(10), vmin(-10.0), vmax(10.0) { normalize(); }
+    
+    //+ CLICONSTR int
+    //! Constructor with dimension
+    FunnelTest(int d) : dim(d), vmin(-10.0), vmax(10.0) { normalize(); }
+
+    //+ CLICONSTR int double double
+    //! Constructor with limits and dimension
+    FunnelTest(int d, double vmin, double vmax) : dim(d), vmin(vmin), vmax(vmax)
+    { normalize(); }
+
+    //! Destructor
+    virtual ~FunnelTest() {}
+    
+    //! This is likelihood function
+    double LikeProb(std::vector<double> &z, SampleDistribution* sd, 
+		    double norm, Tile *t, State *s, int indx);
+    
+    //! The joint cumulative function
+    double CumuProb(std::vector<double> &z, SampleDistribution* sd, 
+		    double norm, Tile *t, State *s, int indx, Fct1dPtr f);
+
+    //! Label parameters
+    const std::string ParameterDescription(int i);
+
+  protected:
+    
+    @persistent_end
+  };
+
+} //namespace BIE
+
+#endif

@@ -1,0 +1,232 @@
+// This is really -*- C++ -*-
+
+
+#ifndef GalaxyModelND_h
+#define GalaxyModelND_h
+
+#include <gaussQ.h>
+#include <Model.h>
+#include <Histogram1D.h>
+#include <BIEconfig.h>
+
+#include <cmath>
+#include <deque>
+#include <utility>
+
+#include <CacheGalaxyModel.h>
+
+@include_persistence
+
+namespace BIE {
+  
+  //+ CLICLASS GalaxyModelND SUPER Model
+  //! Simple test galaxy model with one flux, one color and no caching
+  class @persistent(GalaxyModelND) : public @super(Model)
+  {
+  public:
+
+    //+ CLICONSTR int int SampleDistribution*
+    //! Constructor 
+    GalaxyModelND(int ndim, int mdim, SampleDistribution *histo);
+
+    //! Destructor 
+    ~GalaxyModelND();
+
+    //+ CLIMETHOD void SetKnots int
+    //! Reset number of integration points
+    void SetKnots(int num) 
+    { 
+      NUM = num;
+      delete intgr;
+      intgr = new JacoQuad(NUM, ALPHA, BETA);
+    }
+
+    //+ CLIMETHOD void CacheLimit int
+    //! Maximum number of cache elements (default=0, unlimited)
+    void CacheLimit(int num) { cache_limit=num; }
+
+    //+ CLIMETHOD void SetExtinction double double
+    //! Radial and Vertical size if extinction slab
+    void SetExtinction(double A, double Z) {A1 = A; Z1 = Z;}
+
+    //! Initialize state dependent part of calculation
+    //@{
+    //@! From state vector
+    void Initialize(State&);
+    //@! From component weights and component parameter vectors
+    void Initialize(vector<double>& w, vector< vector<double> >& p);
+    //@}
+
+    //! Reset model cache
+    void ResetCache() {}
+
+    //! Compute normalization of tiles (binned)
+    virtual double NormEval(double x, double y, SampleDistribution *d);
+
+    //! Line of sight eval for point normalization
+    virtual double NormEval(double x, double y);
+
+    //! Integration measure
+    virtual double NormEvalMeasure(double x, double y) { return cos(y); }
+
+    //! Main method returning source density
+    vector<double> Evaluate(double x, double y, SampleDistribution *d);
+
+    //! Identify labels for StateInfo
+    vector<string> ParameterLabels();
+
+    /** @name Global parameters */
+    //@{
+
+    //! Minimum apparent magnitude (default 6)
+    static double @ap(LMAG);
+
+    //! Minimum apparent magnitude (default 16)
+    static double @ap(HMAG);
+
+    //! Extinction scale length (default 20 [kpc])
+    static double @ap(A1);
+
+    //! Extinction scale height (default 100 [pc])
+    static double @ap(Z1);
+
+    //! Standard candle magnitude (default -4.0)
+    static double @ap(K0);
+
+    //! Number of integration knots for Jacobi quadrature (default 200)
+    static int @ap(NUM);
+
+    //! Jacobi quadrature parameters (default: 0, 0)
+    static double @ap(ALPHA);
+    static double @ap(BETA);
+
+    //! Observers position (kpc) (default 8.0)
+    static double @ap(R0);
+
+    // Maximum radius (kpc) (default 20.0)
+    static double @ap(RMAX);
+
+    //! Extinction (mags) (default 0.1)
+    static double @ap(AK);
+
+    //! Limits for model parameters
+    static double @ap(AMIN);		// Defaults: 0.2
+    static double @ap(AMAX);		//           8.0
+    static double @ap(HMIN);		//          50.0
+    static double @ap(HMAX);		//        2000.0
+
+    //! File defining stellar classes
+    static string @ap(BASISDATA);	// Defaults: "basisdata.2d"
+
+    //@}
+
+  protected:
+
+    //! Constants
+    //@{
+    //! \f$\ln(10)\f$
+    static double @ap(Log10);
+    //! Number of radian per degree
+    static double @ap(onedeg);
+    //@}
+
+    //! Maximum number of components in mixture
+    int @ap(M);
+
+    //! Current number of components in mixture
+    int @ap(Mcur);
+
+    //! Number of model dimensions
+    int @ap(Ndim);
+
+    //! Maximum number of sight lines kept in cache
+    unsigned int @ap(cache_limit);
+
+    //! Maintain memory store for cache elements
+    virtual void manageCache(coordPair&);
+
+    //! Constants related to record type.
+    //@{
+    //! Length name
+    static const char* @no_autopersist(LENGTH_FIELDNAME);
+    //! Height name
+    static const char* @no_autopersist(HEIGHT_FIELDNAME);
+    //! Other paramter names
+    static const char* @no_autopersist(PARAM_NAMES)[];
+    //@}
+
+    //! Histogram components
+    //@{
+    //! Number of bins
+    int @ap(nbins);
+    //! Low values for bin boundaries
+    vector<dvector> @ap(lowb);
+    //! High values for bin boundaries
+    vector<dvector> @ap(highb);
+    //@}
+
+    //! Point components
+    vector<double> @ap(flux);
+
+    //! Number of data dimensions
+    int @ap(Nflux);
+
+    //! Low flux limit
+    vector<double> @ap(lolim);
+
+    //! High flux limit
+    vector<double> @ap(hilim);
+
+    //! Stellar components
+    //@{
+    //! Number of components
+    int @ap(nparam);
+    //! Weights for each component
+    vector<double> @ap(w);
+    //! Centers for each component
+    vector<dvector> @ap(pos);
+    //! Widths for each component
+    vector<dvector> @ap(sig);
+    //@}
+
+    //! Integrator
+    JacoQuad *@ap(intgr);
+
+    //! Component weights
+    vector<double> @ap(wt);
+    //! Parameter vectors for each comonent
+    vector< vector<double> > @ap(pt);
+    //! Work vector for bin computation
+    vector<double> @ap(work);
+
+    //! Compute line-of-site quantities
+    virtual void generate(double L, double B, SampleDistribution *sd=NULL);
+    //! Compute bins for current parameter vector
+    virtual void compute_bins();
+
+    //! Flag is true if parameter value are in bounds
+    bool @ap(good_bounds);
+
+    //! Check parameter bounds and set flag
+    void check_bounds();
+
+    //! The line-of-sight element cache
+    mmapGalCM @ap(cache);
+    //! Line-of-sight cache iterator
+    mmapGalCM::iterator mit;
+    //! List of cche keys (for cache maintenance)
+    deque<coordPair> @ap(cacheList);
+    //! Current line of sight
+    CacheGalaxyModel *@ap(current);
+    //! Number of cache misses
+    int @ap(missed);
+
+    //! Evaluation type (e.g. binned or point)
+    EvalType @ap(type);
+
+    @persistent_end
+  };
+
+}
+
+#endif

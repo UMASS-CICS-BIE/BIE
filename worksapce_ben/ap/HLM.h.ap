@@ -1,0 +1,101 @@
+// This is really -*- C++ -*-
+
+#ifndef HLM_h
+#define HLM_h
+
+#include <vector>
+
+#include <LikelihoodFunction.h>
+#include <Serializable.h>
+
+@include_persistence
+
+namespace BIE {
+
+  /** A record class for the hierarchical longitudinal model for CD4
+      measurements in an AIDS study used by Han and Carlin (2001)
+
+      The two models (M=1 and M=2) are those described in Section 4.1
+      of their paper.
+
+      @ingroup likefunc
+  */
+  class @persistent_root(elemHLM)
+  {
+  public:
+    //@{
+    //! Data fields
+    unsigned @ap(drug), @ap(AIDS);
+    vector<int> @ap(numb), @ap(time), @ap(indx);
+    //@}
+    
+    //! Constructor
+    elemHLM() : drug(0), AIDS(0) {}
+
+    @persistent_end
+  };
+
+
+  //+ CLICLASS HLM SUPER LikelihoodFunction 
+  /** This is the Gaussian linear mixed model Hierarchical
+      longitudinal model for CD4 measurements in an AIDS study used by
+      Han and Carlin (2001) 
+  */
+  class @persistent(HLM) : public @super(LikelihoodFunction)
+  {
+  public:
+    
+    //+ CLICONSTR string
+    //+ CLICONSTR string int
+    //! Constructor 
+    HLM(string data, int M=1);
+
+    //! This is likelihood function
+    double LikeProb(std::vector<double> &z, SampleDistribution* sd, 
+		    double norm, Tile *t, State *s, int indx) 
+    { return LocalLikelihood(s); }
+
+    /// Return fixed-effects dimension
+    //+ CLIMETHOD int fixedDim
+    int fixedDim() { return fixdim; }
+
+    /// Return subject dimension
+    //+ CLIMETHOD int subjectDim
+    int subjectDim() { return subdim; }
+
+    /// Return total dimension
+    //+ CLIMETHOD int Dim
+    int Dim() { 
+      if (mod==1) return fixdim+subdim*3;
+      if (mod==2) return fixdim+subdim*2;
+      return 0;
+    }
+
+    /// Label parameters
+    const std::string ParameterDescription(int i);
+
+  private:
+
+    /// Fixed dimension
+    int @ap(fixdim);
+
+    /// Subject specific dimension
+    int @ap(subdim);
+
+    /// The longitudal data
+    vector<elemHLM> @ap(data);
+
+    /// Time vector
+    vector<int> times;
+
+    /// Which alternative: 1=model 1, 2=model 2
+    int @ap(mod);
+
+    /// This is likelihood function
+    double LocalLikelihood(State* s);
+
+    @persistent_end
+  };
+
+} // namespace BIE
+#endif
