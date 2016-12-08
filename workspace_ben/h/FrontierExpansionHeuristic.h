@@ -198,4 +198,5 @@ BIE_CLASS_EXPORT_KEY(BIE::AlwaysIncreaseResolution)
 BIE_CLASS_EXPORT_KEY(BIE::KSDistanceHeuristic)
 BIE_CLASS_EXPORT_KEY(BIE::DataPointCountHeuristic)
 #endif
+
 #endif

@@ -1,2 +1,0 @@
-ConfigFileReader.h:10: Error: Nothing known about namespace 'ost'
-ConfigFileReader.h:27: Warning 401: Nothing known about base class 'Keydata'. Ignored.

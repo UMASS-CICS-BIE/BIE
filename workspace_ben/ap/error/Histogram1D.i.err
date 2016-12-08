@@ -1,3 +1,0 @@
-Histogram1D.h:16: Warning 401: Nothing known about base class 'Serializable'. Ignored.
-Histogram1D.h:79: Warning 401: Nothing known about base class 'SampleHistogram'. Ignored.
-Histogram1D.h:139: Warning 401: Nothing known about base class 'BinnedDistribution'. Ignored.

@@ -1,4 +1,0 @@
-KDTree.h:22: Warning 401: Nothing known about base class 'Serializable'. Ignored.
-KDTree.h:131: Warning 401: Nothing known about base class 'Serializable'. Ignored.
-KDTree.h:199: Warning 401: Nothing known about base class 'BSPTree'. Ignored.
-KDTree.h:741: Warning 401: Nothing known about base class 'Serializable'. Ignored.

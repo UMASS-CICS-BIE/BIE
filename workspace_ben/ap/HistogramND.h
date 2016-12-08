@@ -1,0 +1,269 @@
+// This is really -*- C++ -*-
+
+
+#ifndef HistogramND_h
+#define HistogramND_h
+
+#include <SmplHist.h>
+#include <Distribution.h>
+#include <Histogram1D.h>
+#include <clivector.h>
+
+#include "Serializable.h"
+
+
+namespace BIE {
+
+//+ CLICLASS HistogramND SUPER BinnedDistribution
+/**
+   General n-dimensional histogram (test)
+*/
+class HistogramND : public BinnedDistribution 
+{
+
+private:
+  int dim, nbins;
+  vector<double> bins;
+  vector<double> low, high, width;
+  vector < vector<double> > centers;
+  vector<int> irank, imarg;
+  double vol, mass;
+  vector<double> mean, square, stdev;
+
+  inline int IN(vector<int> i) {
+    int iret = i[dim-1];
+    for (int indx=dim-2; indx>=0; indx--) 
+      iret = i[indx] + irank[indx]*iret;
+    return iret;
+  }
+
+  inline bool OK(State& x) {
+    for (int i=0; i<dim; i++) 
+      if (x[i]<low[i] || x[i] >= high[i]) return false;
+    return true;
+  }
+
+  inline int INDX(State& x) {
+    vector<int> iv(dim);
+    for (int i=0; i<dim; i++) 
+      iv[i] = (int)( (x[i] - low[i])/width[i] );
+    return IN(iv);
+  }
+
+  inline vector<int> IV(int i) {
+    vector<int> ret(dim);
+    for (int indx=dim-1; indx>=0; indx--) {
+      ret[indx] = i/imarg[indx];
+      i -= ret[indx]*imarg[indx];
+    }
+    return ret;
+  }
+
+  //! Common initialization
+  void initialize();
+
+  bool AccumulateData(double v, State& x);
+  bool AccumulateData(double v, RecordBuffer * datapoint);
+
+public:
+  //+ CLICONSTR
+  //! Null constructor
+  HistogramND();
+
+  //+ CLICONSTR clivectord* clivectord* clivectord* RecordType*
+  /** Construct from lower limits @param lo_in and from upper limits
+      @param hi_in and desired bin widths @param width_in .  The fields
+      are defined by the RecordType @param type .
+   */
+  HistogramND(clivectord *lo_in,    clivectord *hi_in, 
+              clivectord *width_in, RecordType* type);
+
+  //+ CLICONSTR clivectord* clivectord* clivectord* clivectors*
+  /** Construct from lower limits @param lo_in and from upper limits
+      @param hi_in and desired bin widths @param width_in .  The field
+      names are defined by the string vector @param names and RecordType
+      is computed internally.
+   */
+  HistogramND(clivectord *lo_in,    clivectord *hi_in, 
+              clivectord *width_in, clivectors *names);
+
+  //! Destructor
+  ~HistogramND();
+
+  //! A factory method for cloning
+  HistogramND* New();
+
+  //! Return the value of the partial distribution function at @param x
+  double PDF(State& x);
+
+  //! Return log value of the partial distribution function at @param x
+  double logPDF(State& x);
+
+  //! Return cumulative distribution function at @param x
+  double CDF(State& x);
+
+  //! Return the low bin values
+  vector<double> lower(void) { return low;}
+
+  //! Return the high bin values
+  vector<double> upper(void) { return high;}
+
+  //! Return the mean bin value
+  vector<double> Mean(void) { return mean;}
+
+  //! Return the standard deviaton about the mean  bin value
+  vector<double> StdDev(void) { return stdev;}
+
+  //! Return ith moment of bin values
+  vector<double> Moments(unsigned i) {
+    if (i==0) return vector<double>(1, 1.0);
+    if (i==2) return square;
+    return mean;
+  }
+
+  //! Sample the histogram
+  State Sample(void) { 
+    cerr << "HistogramND::Sample: Not implemented\n";
+    return State(vector<double>(dim, 0.0));
+  }
+  
+  //! Compute the statistical summary
+  void ComputeDistribution();
+
+  /** Binned distribution members */
+  //@{
+  //! Returns the number of in-bounds bins
+  int numberData() {return nbins;}
+
+  //! Returns the value of a particular (ith) bin.
+  double getValue(unsigned i) {
+    if (i>=0 && static_cast<int>(i)<nbins) return bins[i];
+    else return 0.0;
+  }
+
+  //! Returns the lower boundary of the ith bin
+  vector<double> getLow(unsigned i) {
+    vector<double> ret(dim, 0.0);
+    if (i>=0 && static_cast<int>(i)<nbins) {
+      vector<int> in = IV(i);
+      for (int j=0; j<dim; j++) ret[j] = centers[j][in[j]] - 0.5*width[j];
+    };
+    return ret;
+  }
+
+  //! Returns the upper boundary of the ith bin.
+  vector<double> getHigh(unsigned i) {
+    vector<double> ret(dim, 0.0);
+    if (i>=0 && static_cast<int>(i)<nbins) {
+      vector<int> in = IV(i);
+      for (int j=0; j<dim; j++) ret[j] = centers[j][in[j]] + 0.5*width[j];
+    };
+    return ret;
+
+  }
+
+  //! Returns the dimensionality of the histogram - always 1.
+  int getdim(unsigned i) {return dim;}
+  //@}
+
+  /**
+     Dump a 2-d cut through the n-dimensional histogram at
+     dimensions i and j.  Written as characters with values between
+     0 and 255.  
+  */
+  void dumpraw(string file, int i=0, int j=1);
+
+  /**
+     Dump a 2-d cut through the n-dimensional histogram at
+     dimensions i and j in SM 'ch' format
+  */
+  void dumpsm(string file, int i=0, int j=1);
+
+  /**
+     Dump a 2-d cut through the n-dimensional histogram at
+     dimensions i and j
+  */
+  void dumpmat(vector< vector<double> >&mat, 
+	       vector<double>& x, vector<double>& y,
+	       int i=0, int j=1);
+
+
+  #ifndef SWIG
+    // AUTO GENERATED BY ../persistence/autopersist.py
+    private:
+    friend class boost::serialization::access;
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version) {
+        this->pre_serialize(ar, version);
+         try {                                                         
+          ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(BinnedDistribution);            
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(dim);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(nbins);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(bins);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(low);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(high);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(width);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(centers);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(irank);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(imarg);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(vol);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(mass);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(mean);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(square);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+         try {                                                         
+          ar & BOOST_SERIALIZATION_NVP(stdev);                        
+          BIE_CATCH_BOOST_SERIALIZATION_EXCEPTION;                     
+         }                                                             
+        this->post_serialize(ar, version);
+    }
+    #endif
+
+};
+
+} // namespace BIE
+#ifndef SWIG
+BIE_CLASS_TYPE_INFO(BIE::HistogramND)
+BIE_CLASS_EXPORT_KEY(BIE::HistogramND)
+#endif
+#endif

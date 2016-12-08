@@ -233,27 +233,28 @@ namespace BIE {
 
 }
   
+#ifndef SWIG
+  BIE_CLASS_TYPE_INFO (BIE::clivectord)
+  BIE_CLASS_EXPORT_KEY(BIE::clivectord)
 
-BIE_CLASS_TYPE_INFO (BIE::clivectord)
-BIE_CLASS_EXPORT_KEY(BIE::clivectord)
+  BIE_CLASS_TYPE_INFO (BIE::clivectori)
+  BIE_CLASS_EXPORT_KEY(BIE::clivectori)
 
-BIE_CLASS_TYPE_INFO (BIE::clivectori)
-BIE_CLASS_EXPORT_KEY(BIE::clivectori)
+  BIE_CLASS_TYPE_INFO (BIE::clivectors)
+  BIE_CLASS_EXPORT_KEY(BIE::clivectors)
 
-BIE_CLASS_TYPE_INFO (BIE::clivectors)
-BIE_CLASS_EXPORT_KEY(BIE::clivectors)
+  BIE_CLASS_TYPE_INFO (BIE::clivectortess)
+  BIE_CLASS_EXPORT_KEY(BIE::clivectortess)
 
-BIE_CLASS_TYPE_INFO (BIE::clivectortess)
-BIE_CLASS_EXPORT_KEY(BIE::clivectortess)
+  BIE_CLASS_TYPE_INFO (BIE::clivectordist)
+  BIE_CLASS_EXPORT_KEY(BIE::clivectordist)
 
-BIE_CLASS_TYPE_INFO (BIE::clivectordist)
-BIE_CLASS_EXPORT_KEY(BIE::clivectordist)
+  BIE_CLASS_TYPE_INFO (BIE::clivectorsim)
+  BIE_CLASS_EXPORT_KEY(BIE::clivectorsim)
 
-BIE_CLASS_TYPE_INFO (BIE::clivectorsim)
-BIE_CLASS_EXPORT_KEY(BIE::clivectorsim)
-
-BIE_CLASS_TYPE_INFO (BIE::clivectorRJmap)
-BIE_CLASS_EXPORT_KEY(BIE::clivectorRJmap)
+  BIE_CLASS_TYPE_INFO (BIE::clivectorRJmap)
+  BIE_CLASS_EXPORT_KEY(BIE::clivectorRJmap)
+#endif
 
 
 #endif

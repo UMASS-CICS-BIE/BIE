@@ -1,3 +1,0 @@
-cli_server.h:24: Error: Nothing known about namespace 'ost'
-cli_server.h:38: Warning 401: Nothing known about base class 'Thread'. Ignored.
-cli_server.h:107: Warning 401: Nothing known about base class 'Thread'. Ignored.

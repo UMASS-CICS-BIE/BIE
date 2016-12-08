@@ -1,6 +1,0 @@
-Data.h:35: Warning 389: operator[] ignored (consider using %extend)
-Data.h:37: Warning 389: operator[] ignored (consider using %extend)
-Data.h:46: Warning 509: Overloaded method BIE::Data::x() const effectively ignored,
-Data.h:44: Warning 509: as it is shadowed by BIE::Data::x().
-Data.h:54: Warning 509: Overloaded method BIE::Data::y() const effectively ignored,
-Data.h:52: Warning 509: as it is shadowed by BIE::Data::y().
