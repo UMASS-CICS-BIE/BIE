@@ -186,8 +186,9 @@ namespace BIE {
 
   };  
 }
-
+#ifndef SWIG
 BIE_CLASS_ABSTRACT(BIE::FrontierExpansionHeuristic)
+#endif
 
 #ifndef SWIG
 BIE_CLASS_TYPE_INFO(BIE::AlwaysIncreaseResolution)

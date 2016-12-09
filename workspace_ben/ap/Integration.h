@@ -111,8 +111,9 @@ namespace BIE {
 
   };
 }
-
+#ifndef SWIG
 BIE_CLASS_ABSTRACT(BIE::Integration)
+#endif
 
 #ifndef SWIG
 BIE_CLASS_EXPORT_KEY(BIE::Integration)
