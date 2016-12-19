@@ -1,0 +1,2 @@
+TileMPIThread.h:7: Error: Nothing known about namespace 'ost'
+TileMPIThread.h:16: Warning 401: Nothing known about base class 'Thread'. Ignored.

@@ -1,0 +1,8 @@
+VtkGtkBox.h:31: Warning 315: Nothing known about 'std::string'.
+VtkGtkBox.h:52: Warning 401: Nothing known about base class 'Gtk::DrawingArea'. Ignored.
+VtkGtkBox.h:53: Warning 401: Nothing known about base class 'Gtk::GL::Widget< VtkGtkBox >'. Ignored.
+VtkGtkBox.h:53: Warning 401: Maybe you forgot to instantiate 'Gtk::GL::Widget< VtkGtkBox >' using %template.
+VtkGtkBox.h:31: Warning 315: Nothing known about 'std::string'.
+VtkGtkBox.h:31: Warning 315: Nothing known about 'std::string'.
+VtkGtkBox.h:31: Warning 315: Nothing known about 'std::string'.
+VtkGtkBox.h:31: Warning 315: Nothing known about 'std::string'.

@@ -1,0 +1,53 @@
+CVectorM.h:51: Warning 389: operator[] ignored (consider using %extend)
+CVectorM.h:52: Warning 362: operator= ignored
+CVectorM.h:163: Warning 314: 'print' is a python keyword, renaming to '_print'
+CVectorM.h:206: Warning 362: operator= ignored
+CVectorM.h:207: Warning 389: operator[] ignored (consider using %extend)
+CVectorM.h:295: Warning 314: 'print' is a python keyword, renaming to '_print'
+CVectorM.h:83: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+CVectorM.h:84: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:88: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:92: Warning 503: Can't wrap 'operator &' unless renamed to a valid identifier.
+CVectorM.h:93: Warning 503: Can't wrap 'operator &' unless renamed to a valid identifier.
+CVectorM.h:100: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:101: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:102: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+CVectorM.h:106: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:107: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:108: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+CVectorM.h:114: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:115: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:116: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:121: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+CVectorM.h:122: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:123: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:128: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:129: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+CVectorM.h:130: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:131: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:132: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+CVectorM.h:133: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:140: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+CVectorM.h:141: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:142: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:145: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:146: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:147: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:149: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+CVectorM.h:150: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:151: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:262: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+CVectorM.h:263: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+CVectorM.h:264: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:265: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:280: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:281: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:283: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+CVectorM.h:284: Warning 503: Can't wrap 'operator +' unless renamed to a valid identifier.
+CVectorM.h:285: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:286: Warning 503: Can't wrap 'operator -' unless renamed to a valid identifier.
+CVectorM.h:288: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:289: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:290: Warning 503: Can't wrap 'operator /' unless renamed to a valid identifier.
+CVectorM.h:314: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.
+CVectorM.h:315: Warning 503: Can't wrap 'operator *' unless renamed to a valid identifier.

@@ -1,0 +1,2 @@
+Chain.h:127: Warning 362: operator= ignored
+Chain.h:25: Warning 401: Nothing known about base class 'Serializable'. Ignored.

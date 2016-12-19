@@ -1,0 +1,2 @@
+SquareTile.h:44: Warning 314: 'print' is a python keyword, renaming to '_print'
+SquareTile.h:15: Warning 401: Nothing known about base class 'Tile'. Ignored.

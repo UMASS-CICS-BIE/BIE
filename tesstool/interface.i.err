@@ -1,0 +1,15 @@
+interface.h:15: Warning 509: Overloaded method TESSTOOL::initializeGTK(int,char **) effectively ignored,
+interface.h:11: Warning 509: as it is shadowed by TESSTOOL::initializeGTK(int,char *[]).
+interface.h:22: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:23: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:24: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:25: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:26: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:30: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:31: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:32: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:33: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:34: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:35: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:36: Warning 454: Setting a pointer/reference variable may leak memory.
+interface.h:37: Warning 454: Setting a pointer/reference variable may leak memory.

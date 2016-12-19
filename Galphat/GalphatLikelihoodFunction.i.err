@@ -1,0 +1,3 @@
+GalphatLikelihoodFunction.h:292: Warning 325: Nested class not currently supported (ShearRotateReal ignored)
+GalphatLikelihoodFunction.h:311: Warning 325: Nested class not currently supported (InterpRotateReal ignored)
+GalphatLikelihoodFunction.h:40: Warning 401: Nothing known about base class 'LikelihoodFunction'. Ignored.

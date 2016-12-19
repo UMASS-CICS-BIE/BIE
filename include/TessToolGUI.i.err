@@ -1,0 +1,3 @@
+TessToolGUI.h:18: Error: Nothing known about namespace 'ost'
+TessToolGUI.h:27: Warning 401: Nothing known about base class 'Thread'. Ignored.
+TessToolGUI.h:39: Warning 454: Setting a pointer/reference variable may leak memory.

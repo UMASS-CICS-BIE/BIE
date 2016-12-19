@@ -1,0 +1,5 @@
+Tessellation.h:157: Warning 325: Nested struct not currently supported (compx ignored)
+Tessellation.h:168: Warning 325: Nested struct not currently supported (compy ignored)
+Tessellation.h:179: Warning 325: Nested struct not currently supported (compxy ignored)
+Tessellation.h:194: Warning 325: Nested struct not currently supported (hashCoords ignored)
+Tessellation.h:249: Error: Syntax error in input(1).

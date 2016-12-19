@@ -1,0 +1,2 @@
+MuSquareTile.h:46: Warning 314: 'print' is a python keyword, renaming to '_print'
+MuSquareTile.h:22: Warning 401: Nothing known about base class 'SquareTile'. Ignored.

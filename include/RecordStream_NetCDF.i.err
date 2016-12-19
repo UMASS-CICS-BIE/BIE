@@ -1,0 +1,2 @@
+RecordStream_NetCDF.h:33: Warning 401: Nothing known about base class 'RecordInputStream'. Ignored.
+RecordStream_NetCDF.h:133: Warning 401: Nothing known about base class 'RecordOutputStream'. Ignored.
