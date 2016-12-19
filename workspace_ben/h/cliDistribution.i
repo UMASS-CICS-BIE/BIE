@@ -4,4 +4,6 @@
 #include "cliDistribution.h"
 #undef
 %}
+%include "../Serializable.h"
+%include "Distribution.h"
 %include "cliDistribution.h"

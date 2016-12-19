@@ -5,4 +5,5 @@
 #include "CliOutputReceiveThread.h"
 #undef
 %}
+
 %include "CliOutputReceiveThread.h"

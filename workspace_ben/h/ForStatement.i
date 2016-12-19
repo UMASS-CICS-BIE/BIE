@@ -4,4 +4,5 @@
 #include "ForStatement.h"
 #undef
 %}
+%include "Statement.i"
 %include "ForStatement.h"
