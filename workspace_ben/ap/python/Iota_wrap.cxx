@@ -3116,7 +3116,7 @@ namespace swig {
 
 #define SWIG 1
 #include "Iota.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

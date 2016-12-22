@@ -3123,7 +3123,7 @@ namespace swig {
 #define SWIG 1
 
 #include "clivector.h"
-#undef
+#undef SWIG
 
 #ifdef __cplusplus
 extern "C" {

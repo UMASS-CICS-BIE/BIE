@@ -3115,7 +3115,7 @@ namespace swig {
 
 #define SWIG 1
 #include "getfile.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERNINLINE PyObject*

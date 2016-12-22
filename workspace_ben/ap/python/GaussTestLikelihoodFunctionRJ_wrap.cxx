@@ -3128,7 +3128,7 @@ namespace swig {
 #include "Likelihood.h"
 #include "GaussTestLikelihoodFunction.h"
 #include "GaussTestLikelihoodFunctionRJ.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

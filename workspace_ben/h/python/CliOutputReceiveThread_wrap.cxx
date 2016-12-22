@@ -3119,7 +3119,7 @@ namespace swig {
 
 #define SWIG 1
 #include "CliOutputReceiveThread.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

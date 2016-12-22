@@ -3123,7 +3123,7 @@ namespace swig {
 
 #define SWIG 1
 #include "GaussTestLikelihoodFunctionMulti.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

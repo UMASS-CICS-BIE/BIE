@@ -3118,7 +3118,7 @@ namespace swig {
 
 #define SWIG 1
 #include "GalaxyModelOneDCached.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

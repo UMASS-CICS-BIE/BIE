@@ -3122,7 +3122,7 @@ namespace swig {
 
 #define SWIG 1
 #include "FivePointIntegration.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN int

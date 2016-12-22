@@ -3121,7 +3121,7 @@ namespace swig {
 
 #define SWIG 1
 #include "GelmanRubinConverge.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN int

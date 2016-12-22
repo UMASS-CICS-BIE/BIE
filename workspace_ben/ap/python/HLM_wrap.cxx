@@ -3124,7 +3124,7 @@ namespace swig {
 
 #define SWIG 1
 #include "HLM.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

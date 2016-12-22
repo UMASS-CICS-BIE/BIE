@@ -3117,7 +3117,7 @@ namespace swig {
 
 #define SWIG 1
 #include "coord.h"
-#undef
+#undef SWIG
 
 
   #define SWIG_From_double   PyFloat_FromDouble 

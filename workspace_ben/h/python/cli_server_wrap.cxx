@@ -3119,7 +3119,7 @@ namespace swig {
 #define SWIG 1
 #include ost
 #include "cli_server.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN swig_type_info*

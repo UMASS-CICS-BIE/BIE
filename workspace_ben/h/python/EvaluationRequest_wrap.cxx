@@ -3121,7 +3121,7 @@ namespace swig {
 
 #define SWIG 1
 #include "EvaluationRequest.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

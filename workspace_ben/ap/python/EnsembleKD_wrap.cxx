@@ -3122,7 +3122,7 @@ namespace swig {
 
 #define SWIG 1
 #include "EnsembleKD.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

@@ -3120,7 +3120,7 @@ namespace swig {
 
 #define SWIG 1
 #include "Frontier.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

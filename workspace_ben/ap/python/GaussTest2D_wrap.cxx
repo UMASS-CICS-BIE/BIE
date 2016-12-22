@@ -3123,7 +3123,7 @@ namespace swig {
 
 #define SWIG 1
 #include "GaussTest2D.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

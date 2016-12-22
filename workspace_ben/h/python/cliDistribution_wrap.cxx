@@ -3117,7 +3117,7 @@ namespace swig {
 
 #define SWIG 1
 #include "cliDistribution.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

@@ -3121,7 +3121,7 @@ namespace swig {
 
 #define SWIG 1
 #include "InitialMixturePriorPoisson.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN int

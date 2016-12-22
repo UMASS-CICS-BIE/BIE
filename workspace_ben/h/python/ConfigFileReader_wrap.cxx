@@ -3118,7 +3118,7 @@ namespace swig {
 
 #define SWIG 1
 #include "ConfigFileReader.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN swig_type_info*

@@ -3118,7 +3118,7 @@ namespace swig {
 
 #define SWIG 1
 #include "ForStatement.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN swig_type_info*

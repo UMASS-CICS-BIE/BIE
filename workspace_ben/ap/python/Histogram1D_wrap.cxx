@@ -3122,7 +3122,7 @@ namespace swig {
 
 #define SWIG 1
 #include "Histogram1D.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN int

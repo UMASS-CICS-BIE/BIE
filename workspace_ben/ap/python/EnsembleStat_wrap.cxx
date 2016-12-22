@@ -3126,7 +3126,7 @@ namespace swig {
 
 #define SWIG 1
 #include "EnsembleStat.h"
-#undef
+#undef SWIG
 
 
 #include <limits.h>

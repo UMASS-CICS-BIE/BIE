@@ -3122,7 +3122,7 @@ namespace swig {
 
 #define SWIG 1
 #include "Integration.h"
-#undef
+#undef SWIG
 
 
   #define SWIG_From_double   PyFloat_FromDouble 

@@ -3119,7 +3119,7 @@ namespace swig {
 
 #define SWIG 1
 #include "GammaDist.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN int

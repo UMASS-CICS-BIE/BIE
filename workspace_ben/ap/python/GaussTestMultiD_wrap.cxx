@@ -3124,7 +3124,7 @@ namespace swig {
 
 #define SWIG 1
 #include "GaussTestMultiD.h"
-#undef
+#undef SWIG
 
 
 SWIGINTERN int
