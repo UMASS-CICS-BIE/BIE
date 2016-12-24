@@ -2,8 +2,9 @@
 %{
 #define SWIG 1
 #include "cliDistribution.h"
-#undef
+#undef SWIG
 %}
-%include "../Serializable.h"
+
+%include "../persistence/Serializable.h"
 %include "Distribution.h"
 %include "cliDistribution.h"

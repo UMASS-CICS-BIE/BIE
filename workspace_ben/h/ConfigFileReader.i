@@ -2,6 +2,6 @@
 %{
 #define SWIG 1
 #include "ConfigFileReader.h"
-#undef
+#undef SWIG
 %}
 %include "ConfigFileReader.h"

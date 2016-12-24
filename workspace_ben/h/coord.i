@@ -2,6 +2,6 @@
 %{
 #define SWIG 1
 #include "coord.h"
-#undef
+#undef SWIG
 %}
 %include "coord.h"

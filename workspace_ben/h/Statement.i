@@ -2,9 +2,9 @@
 
 %{
 #define SWIG 1
-#import "Statement.h"
-#undef	
+#include "Statement.h"
+#undef SWIG
 %}
 
-%import "../Persistence/Serializable.h"
-%import "Statement.h"
+%include "../persistence/Serializable.h"
+%include "Statement.h"

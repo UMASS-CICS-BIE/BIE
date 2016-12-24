@@ -2,6 +2,6 @@
 %{
 #define SWIG 1
 #include "getfile.h"
-#undef
+#undef SWIG
 %}
 %include "getfile.h"
